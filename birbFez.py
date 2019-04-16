@@ -24,7 +24,7 @@ async def on_message(message):
 	if message.author == bot.user:
 		return
 	if re.search('birbfez', message.content, re.IGNORECASE):
-		print('{0.author.name}#{0.author.id} mentioned birbfez'.format(message))
+		print('{0.author.name}#{0.author.id} mentioned birbfez in #{0.channel.name} ({0.guild.name})'.format(message))
 		print("-------")
 		emoji = ['\N{EYES}', '\N{THUMBS UP SIGN}', '\N{HATCHING CHICK}', '\N{BIRD}']
 		mojinum = len(emoji) - 1
