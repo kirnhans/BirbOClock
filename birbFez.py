@@ -16,39 +16,51 @@ class MyBot(commands.Bot):
 		print('Logged in as ' + self.user.name + "#" + str(self.user.id))
 		print('-------')
 		cogs = ['cogBasic', ]
-		try:
-			for cog in cogs:
-				self.load_extension(cog)
-				print('Loaded cogBasic')
-		except:
-			print('Failed to load cogBasic')
+		while not self.is_closed():
+			try:
+				for cog in cogs:
+					self.load_extension(cog)
+					print('Loaded cogBasic')
+				break
+			except:
+				print('Error loading cogBasic')
+				await asyncio.sleep(10)
 		print('-------')
 		self.bg_task = self.loop.create_task(self.loop_games())
 
-	# speak of the birbfez and it shall appear
+	# SPEAK OF THE BIRBFEZ AND IT SHALL APPEAR
+	# reacts to its name
+	# tells people with certain roles to go to sleep
 	async def on_message(self, message):
 		if message.author == self.user:
 			return
 		if re.search('birbfez', message.content, re.IGNORECASE):
 			print('{0.author.name}#{0.author.id} mentioned birbfez in #{0.channel.name} ({0.guild.name})'.format(message))
 			print("-------")
-			emoji = ['\N{EYES}', '\N{THUMBS UP SIGN}', '\N{HATCHING CHICK}', '\N{BIRD}']
+			emoji = ['\N{EYES}', '\N{THUMBS UP SIGN}', '\N{HATCHING CHICK}', '\N{BIRD}', 
+			'\N{BREAD}']
 			mojinum = len(emoji) - 1
 			await message.add_reaction(emoji[random.randint(0,mojinum)])
+		if "needs bedtime reminders" in [r.name for r in message.author.roles]:
+			print('{0.author.name}#{0.author.id} is still awake in #{0.channel.name} ({0.guild.name})'.format(message))
+			print("-------")
+			msg = await message.channel.send(file=discord.File('images/sleep.png'))
+			await asyncio.sleep(5)
+			await msg.delete()
 		await self.process_commands(message)
 
 	# background tasks:
 	# loop_games(self) -> cycle through preset game statuses
 	async def loop_games(self):
 		await self.wait_until_ready()
-		games = ["without supervision", "with humans", "Python 3", ]
+		games = ["without supervision", "with humans", "Python 3", "The Seven Birby Sins: not being birb", "The Seven Birbly Sins: not bein birb", "The Sevn Birbl Sins: murder"]
 		while not self.is_closed():
 			try:
 				for game in games:
 					print('Playing ' + game)
 					print("-------")
 					await self.change_presence(activity=discord.Game(name=game))
-					await asyncio.sleep(5)	# changes game every 5 seconds
+					await asyncio.sleep(7)	# changes game every 7 seconds
 			except:
 				print('birbfez experienced a gaming mishap.')
 
@@ -81,20 +93,6 @@ bot.run(TOKEN)
 # 	hello
 # 	sleep
 # '''''''''
-
-# @bot.command(name='ping', description="The most basic command... for now.", brief="The most basic command... for now.", pass_context=True)
-# async def ping(ctx):
-# 	print('pinged by {0.message.author.name}#{0.message.author.id}'.format(ctx))
-# 	print("-------")
-# 	await ctx.channel.send('pong')
-# 	await bot.change_presence(activity=discord.Game(name="ping-pong"))
-# 	await asyncio.sleep(5)
-	
-# @bot.command(name='hello', description="Almost as basic as ping.", brief="Almost as basic as ping.", pass_context=True)
-# async def hello(ctx):
-# 	print('{0.message.author.name}#{0.message.author.id} said hello'.format(ctx))
-# 	print("-------")
-# 	await ctx.channel.send('Hi, {0.message.author.mention}.'.format(ctx))
 
 # @bot.command(name='sleep', description="It is bed o'clock.\nYou best be sleeping.", brief="It is bed o'clock.", pass_context=True)
 # async def sleep(ctx):
