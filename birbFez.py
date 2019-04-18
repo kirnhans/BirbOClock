@@ -8,16 +8,22 @@ TOKEN = 'MzM4MDc5MzU5NjczODI3MzI5.XKaguA.x02mZO1c59_dDCradPhfBFDbWrg'
 BOT_PREFIX = ('f#', 'f!')
 DESCRIPT = 'A work in progress. Mostly just reacts to its name.'
 
-class MyBot(discord.Client):
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
 
-		# running background tasks
-		self.bg_task = self.loop.create_task(self.loop_games())
+
+class MyBot(commands.Bot):
 
 	async def on_ready(self):
 		print('Logged in as ' + self.user.name + "#" + str(self.user.id))
 		print('-------')
+		cogs = ['cogBasic', ]
+		try:
+			for cog in cogs:
+				self.load_extension(cog)
+				print('Loaded cogBasic')
+		except:
+			print('Failed to load cogBasic')
+		print('-------')
+		self.bg_task = self.loop.create_task(self.loop_games())
 
 	# speak of the birbfez and it shall appear
 	async def on_message(self, message):
@@ -29,7 +35,7 @@ class MyBot(discord.Client):
 			emoji = ['\N{EYES}', '\N{THUMBS UP SIGN}', '\N{HATCHING CHICK}', '\N{BIRD}']
 			mojinum = len(emoji) - 1
 			await message.add_reaction(emoji[random.randint(0,mojinum)])
-			return
+		await self.process_commands(message)
 
 	# background tasks:
 	# loop_games(self) -> cycle through preset game statuses
@@ -47,7 +53,7 @@ class MyBot(discord.Client):
 				print('birbfez experienced a gaming mishap.')
 
 
-bot = MyBot()
+bot = MyBot(BOT_PREFIX)
 bot.run(TOKEN)
 
 # bot = commands.Bot(command_prefix=BOT_PREFIX, description=DESCRIPT)
@@ -63,12 +69,6 @@ bot.run(TOKEN)
 # 	# do not reply to itself
 # 	if message.author == bot.user:
 # 		return
-# 	if re.search('birbfez', message.content, re.IGNORECASE):
-# 		print('{0.author.name}#{0.author.id} mentioned birbfez in #{0.channel.name} ({0.guild.name})'.format(message))
-# 		print("-------")
-# 		emoji = ['\N{EYES}', '\N{THUMBS UP SIGN}', '\N{HATCHING CHICK}', '\N{BIRD}']
-# 		mojinum = len(emoji) - 1
-# 		await message.add_reaction(emoji[random.randint(0,mojinum)])
 # 	if message.content.startswith('!shinidab'):
 # 		msg = 'https://cdnw.nickpic.host/mgKajb.gif'.format(message)
 # 		await message.channel.send(msg)
