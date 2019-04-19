@@ -20,7 +20,7 @@ class MyBot(commands.Bot):
 			try:
 				for cog in cogs:
 					self.load_extension(cog)
-					print('Loaded cogBasic')
+					print('Loaded ' + cog)
 				break
 			except:
 				print('Error loading cogBasic')
@@ -41,10 +41,10 @@ class MyBot(commands.Bot):
 			'\N{BREAD}']
 			mojinum = len(emoji) - 1
 			await message.add_reaction(emoji[random.randint(0,mojinum)])
-		if "needs bedtime reminders" in [r.name for r in message.author.roles]:
+		if "sleepy" in [r.name for r in message.author.roles]:
 			print('{0.author.name}#{0.author.id} is still awake in #{0.channel.name} ({0.guild.name})'.format(message))
 			print("-------")
-			msg = await message.channel.send(file=discord.File('images/sleep.png'))
+			msg = await message.channel.send("{0.author.mention}".format(message), file=discord.File('images/sleep.png'))
 			await asyncio.sleep(5)
 			await msg.delete()
 		await self.process_commands(message)
@@ -53,7 +53,12 @@ class MyBot(commands.Bot):
 	# loop_games(self) -> cycle through preset game statuses
 	async def loop_games(self):
 		await self.wait_until_ready()
-		games = ["without supervision", "with humans", "Python 3", "The Seven Birby Sins: not being birb", "The Seven Birbly Sins: not bein birb", "The Sevn Birbl Sins: murder"]
+		games = [ #"without supervision", 
+		"under supervision", 
+		"with humans", 
+		"Python 3", 
+		"The SevEn Birbly Sins: murder",
+		"4 HOTT CHEETOZ"]
 		while not self.is_closed():
 			try:
 				for game in games:
@@ -68,13 +73,10 @@ class MyBot(commands.Bot):
 bot = MyBot(BOT_PREFIX)
 bot.run(TOKEN)
 
-# bot = commands.Bot(command_prefix=BOT_PREFIX, description=DESCRIPT)
-# bot.load_extension('cogBasic')
 
-# @bot.event
-# async def on_ready():
-# 	print('Logged in as ' + bot.user.name + '#' + str(bot.user.id))
-# 	print('-------')
+'''''''''
+scrapped code follows
+'''''''''
 
 # @bot.event
 # async def on_message(message):
@@ -85,20 +87,6 @@ bot.run(TOKEN)
 # 		msg = 'https://cdnw.nickpic.host/mgKajb.gif'.format(message)
 # 		await message.channel.send(msg)
 # 	await bot.process_commands(message)
-
-
-# '''''''''
-# The very most basic commands:
-# 	ping
-# 	hello
-# 	sleep
-# '''''''''
-
-# @bot.command(name='sleep', description="It is bed o'clock.\nYou best be sleeping.", brief="It is bed o'clock.", pass_context=True)
-# async def sleep(ctx):
-# 	print('{0.message.author.name}#{0.message.author.id} needs to go to sleep'.format(ctx))
-# 	print("-------")
-# 	await ctx.channel.send('https://cdn.discordapp.com/attachments/187641780420739073/497663328337002498/1.png')
 
 
 # '''''''''
