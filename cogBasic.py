@@ -45,19 +45,49 @@ class BasicCog(commands.Cog, name='Basic Commands'):
 	# consider moving into a new cog (cogMemes)
 	@commands.command(description="Format your own \"in this house\" meme!", brief="there is no dying.")
 	async def inthishouse(self, ctx, *, message:str):
+		# try:
 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n" + message + "\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
 		await ctx.send(house)
+		# except commands.MissingRequiredArgument:
+		# 	def acheck(m):
+		# 		return m.author == ctx.author
+		# 	await ctx.send("In this house what?")
+		# 	try:
+		# 		msg = await self.bot.wait_for("message", timeout=30.0, check=acheck)
+		# 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n" + msg + "\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
+		# 		await ctx.send(house)
+		# 	except asyncio.TimeoutError:
+		# 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n**birbfez is the besst!!**\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
+		# 		await ctx.send(house)
 
-	# # sleepy - adds the sleepy role to the member mentioned,
-	# #	or asks who to make sleepy.
-	# @commands.command(description="Something about sleep.", brief="Something about sleep.")
-	# async def sleepy(self, ctx, *, member: discord.Member):
-	# 	role = await ctx.guild.create_role(name="sleepy")
-	# 	try:
-	# 		await member.add_roles([role])
-	# 	except:
-	# 		await ctx.send("Who's sleepy?")
 
+	# sleepy group of commands:
+	# role - sets the role within the guild to be used as the sleepy role
+	# sleepy - adds the sleepy role to the member mentioned,
+	#	or asks who to make sleepy.
+	@commands.group(description="Something about sleep?", brief="Something about sleep?")
+	async def sleepy(self, ctx, arg:discord.member):
+		# if ctx.invoked_subcommand is None:
+			# await ctx.send("**{0.author.name}**, the correct usage is ``f!sleepy [ @user | role ]``".format(ctx))
+
+		def rcheck():
+			return "sleepy" in [r.name for r in ctx.guild.roles]
+		if not rcheck():
+			await ctx.send("There is no sleepy role.")
+
+		try:
+			await ctx.send("{arg.mention} is now sleepy".format(ctx))
+		except Forbidden:
+			await ctx.send("I don't have permission to add roles \N{PENSIVE FACE}")
+		except:
+			def acheck(m):
+				return m.author == ctx.author
+			await ctx.send("Who's sleepy?")
+			try:
+				msg = await self.bot.wait_for("message", timeout=30.0, check=acheck)
+				await ctx.send(msg.content + " is sleepy.")
+			except asyncio.TimeoutError:
+				await ctx.send("Guess nobirby's sleepy then. \N{BLACK SUN WITH RAYS}")
 
 	# # wakeup - removes the sleepy role from the member mentioned
 	# @commands.command(description="Removes the sleepy role.", brief="No longer sleepy.")
