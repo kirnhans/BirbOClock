@@ -56,8 +56,8 @@ class MyBot(commands.Bot):
 	# loop_games(self) -> cycle through preset game statuses
 	async def loop_games(self):
 		await self.wait_until_ready()
-		games = [ #"without supervision", 
-		"under supervision", 
+		games = [ "without supervision", 
+		# "under supervision", 
 		"with humans", 
 		"Python 3", 
 		"The SevEn Birbly Sins: murder",

@@ -65,8 +65,8 @@ class BasicCog(commands.Cog, name='Basic Commands'):
 	# role - sets the role within the guild to be used as the sleepy role
 	# sleepy - adds the sleepy role to the member mentioned,
 	#	or asks who to make sleepy.
-	@commands.group(description="Something about sleep?", brief="Something about sleep?")
-	async def sleepy(self, ctx, arg:discord.member):
+	@commands.group(description="Under construction.", brief="Something about sleep?")
+	async def sleepy(self, ctx, arg:str):
 		# if ctx.invoked_subcommand is None:
 			# await ctx.send("**{0.author.name}**, the correct usage is ``f!sleepy [ @user | role ]``".format(ctx))
 
@@ -76,7 +76,7 @@ class BasicCog(commands.Cog, name='Basic Commands'):
 			await ctx.send("There is no sleepy role.")
 
 		try:
-			await ctx.send("{arg.mention} is now sleepy".format(ctx))
+			await ctx.send(arg + " is now sleepy".format(ctx))
 		except Forbidden:
 			await ctx.send("I don't have permission to add roles \N{PENSIVE FACE}")
 		except:
