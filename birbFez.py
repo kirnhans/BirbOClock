@@ -8,17 +8,17 @@ TOKEN = "MzM4MDc5MzU5NjczODI3MzI5.XKaguA.x02mZO1c59_dDCradPhfBFDbWrg"
 BOT_PREFIX = ("f#", "f!")
 DESCRIPT = "A work in progress. Mostly just reacts to its name."
 
+fez_id = 63331581745438720
+birbcogs = ["cogBasic", "cogInfo", ]
 
-
-class MyBot(commands.Bot):
+class BirbFez(commands.Bot):
 
 	async def on_ready(self):
 		print("Logged in as " + self.user.name + "#" + str(self.user.id))
 		print("-------")
-		cogs = ["cogBasic", "cogInfo", ]
 		while not self.is_closed():
 			try:
-				for cog in cogs:
+				for cog in birbcogs:
 					self.load_extension(cog)
 					print("Loaded " + cog)
 				break
@@ -37,6 +37,7 @@ class MyBot(commands.Bot):
 			return
 		# if message.content.startswith("test"):
 		# 	await message.add_reaction("\N{PENSIVE FACE}")
+
 		if re.search("birbfez", message.content, re.IGNORECASE):
 			print("{0.author.name}#{0.author.id} mentioned birbfez in #{0.channel.name} ({0.guild.name})".format(message))
 			print("-------")
@@ -44,12 +45,14 @@ class MyBot(commands.Bot):
 			"\N{BREAD}"]
 			mojinum = len(emoji) - 1
 			await message.add_reaction(emoji[random.randint(0,mojinum)])
+
 		if "sleepy" in [r.name for r in message.author.roles]:
 			print("{0.author.name}#{0.author.id} is still awake in #{0.channel.name} ({0.guild.name})".format(message))
 			print("-------")
 			msg = await message.channel.send("{0.author.mention}".format(message), file=discord.File("images/sleep.png"))
 			await asyncio.sleep(5)
 			await msg.delete()
+
 		await self.process_commands(message)
 
 	# background tasks:
@@ -83,8 +86,39 @@ class MyBot(commands.Bot):
 			await ctx.send("**{0.author.name}**, you missed some arguments in the command:\n{0.message.content}".format(ctx))
 
 
+bot = BirbFez(BOT_PREFIX, description=DESCRIPT)
 
-bot = MyBot(BOT_PREFIX)
+# Unsorted Commands: 
+# ping - Tests connection
+@bot.command(description="A very basic command.", 
+	brief="A very basic command.")
+async def ping(ctx):
+	await bot.change_presence(activity=discord.Game(name="ping-pong"))
+	await ctx.send('pong')
+	await asyncio.sleep(5)
+
+# bot state management
+@bot.command(name="refresh",
+	description="Reload all bot cogs and extensions.",
+	brief="Update bot to most recent changes.",
+	aliases=["reload", "rld","rf"],
+	pass_context=True)
+async def refresh(ctx):
+	if ctx.message.author.id == fez_id:
+		try:
+			for cog in birbcogs:
+				self.reload_extension(cog)
+				print("Loaded " + cog)
+			print("-------")
+			await ctx.send("BirbFez haz reloaded!")
+		except:
+			print("Error loading a cog")
+			print("-------")
+			await ctx.send("BirbFez tripped :(")
+			await asyncio.sleep(10)
+	else:
+		await ctx.channel.send("No thanks, {0.author.mention} :/".format(ctx))
+
 bot.run(TOKEN)
 
 
