@@ -1,4 +1,6 @@
-Discord Bot: BirbFez
+# Birb O'Clock
+
+## Usage 
 
 General		[birbFez.py]
 	+ reacts to its name
@@ -11,3 +13,8 @@ Requested	[cogBasic.py]
 
 In Development:
 	- 
+
+## Run on linux
+
+First run `./setup.sh` to generate the venv with the required dependencies
+Then run `./run.sh` to run the application in the venv
