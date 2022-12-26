@@ -1,10 +1,10 @@
 import asyncio
 import discord
+import os
 from discord.ext import commands
 import re
 import random
 
-TOKEN = "MzM4MDc5MzU5NjczODI3MzI5.XKaguA.x02mZO1c59_dDCradPhfBFDbWrg"
 BOT_PREFIX = ("f#", "f!")
 DESCRIPT = "A work in progress. Mostly just reacts to its name."
 
@@ -119,7 +119,7 @@ async def refresh(ctx):
 	else:
 		await ctx.channel.send("No thanks, {0.author.mention} :/".format(ctx))
 
-bot.run(TOKEN)
+bot.run(os.environ["DISCORD_TOKEN"])
 
 
 '''''''''

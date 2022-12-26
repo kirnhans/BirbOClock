@@ -17,4 +17,4 @@ In Development:
 ## Run on linux
 
 First run `./setup.sh` to generate the venv with the required dependencies
-Then run `./run.sh` to run the application in the venv
+Then run `DISCORD_TOKEN=XXX ./run.sh` to run the application in the venv
