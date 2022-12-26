@@ -36,7 +36,7 @@ class BasicCog(commands.Cog, name='Requested Commands'):
 
 	# hello - Replies with one of several random strings
 	@commands.command(name="hello",
-		description="If you ever need a friend, birbfez is here to provide.", 
+		description="If you ever need a friend, BirbOClock is here to provide.", 
 		brief="For sh*ts and giggles.",
 		aliases=["hi"])
 	async def hello(self, ctx):
@@ -62,12 +62,12 @@ class BasicCog(commands.Cog, name='Requested Commands'):
 		# 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n" + msg + "\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
 		# 		await ctx.send(house)
 		# 	except asyncio.TimeoutError:
-		# 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n**birbfez is the besst!!**\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
+		# 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n**BirbOClock is the besst!!**\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
 		# 		await ctx.send(house)
 
 	# sleep - sends "sleep.png"
 	@commands.command(name="sleep",
-		description="BirbFez will tell someone to go to sleep.",
+		description="BirbOClock will tell someone to go to sleep.",
 		brief="You need it.",
 		aliases=["sleepy", "tired", "gotosleep", "gosleep", "gts"])
 	async def sleep(self, ctx):
@@ -75,7 +75,7 @@ class BasicCog(commands.Cog, name='Requested Commands'):
 
 	# please - sends "please.gif"
 	@commands.command(name="please",
-		description="BirbFez will send a gif of a pupper.",
+		description="BirbOClock will send a gif of a pupper.",
 		brief="Please please please?",
 		aliases=["pls", "plz", "plzz", "test"])
 	async def please(self, ctx):

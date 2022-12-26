@@ -2,7 +2,7 @@
 
 ## Usage 
 
-General		[birbFez.py]
+General		[BirbOClock.py]
 	+ reacts to its name
 	+ refresh	reloads cogs
 	+ ping		updates gaming status

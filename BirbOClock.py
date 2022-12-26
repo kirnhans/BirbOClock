@@ -11,7 +11,7 @@ DESCRIPT = "A work in progress. Mostly just reacts to its name."
 fez_id = 63331581745438720
 birbcogs = ["cogBasic", "cogInfo", ]
 
-class BirbFez(commands.Bot):
+class BirbOClock(commands.Bot):
 
 	async def on_ready(self):
 		print("Logged in as " + self.user.name + "#" + str(self.user.id))
@@ -29,7 +29,7 @@ class BirbFez(commands.Bot):
 		print("-------")
 		self.bg_task = self.loop.create_task(self.loop_games())
 
-	# SPEAK OF THE BIRBFEZ AND IT SHALL APPEAR
+	# SPEAK OF THE BirbOClock AND IT SHALL APPEAR
 	# reacts to its name
 	# tells people with certain roles to go to sleep
 	async def on_message(self, message):
@@ -38,8 +38,8 @@ class BirbFez(commands.Bot):
 		# if message.content.startswith("test"):
 		# 	await message.add_reaction("\N{PENSIVE FACE}")
 
-		if re.search("birbfez", message.content, re.IGNORECASE):
-			print("{0.author.name}#{0.author.id} mentioned birbfez in #{0.channel.name} ({0.guild.name})".format(message))
+		if re.search("BirbOClock", message.content, re.IGNORECASE):
+			print("{0.author.name}#{0.author.id} mentioned BirbOClock in #{0.channel.name} ({0.guild.name})".format(message))
 			print("-------")
 			emoji = ["\N{EYES}", "\N{THUMBS UP SIGN}", "\N{HATCHING CHICK}", "\N{BIRD}", 
 			"\N{BREAD}"]
@@ -73,7 +73,7 @@ class BirbFez(commands.Bot):
 					await self.change_presence(activity=discord.Game(name=game))
 					await asyncio.sleep(7)	# changes game every 7 seconds
 			except:
-				print("birbfez experienced a gaming mishap.")
+				print("BirbOClock experienced a gaming mishap.")
 				print("-------")
 				await asyncio.sleep(7)
 
@@ -86,7 +86,7 @@ class BirbFez(commands.Bot):
 			await ctx.send("**{0.author.name}**, you missed some arguments in the command:\n{0.message.content}".format(ctx))
 
 
-bot = BirbFez(BOT_PREFIX, description=DESCRIPT)
+bot = BirbOClock(BOT_PREFIX, description=DESCRIPT)
 
 # Unsorted Commands: 
 # ping - Tests connection
@@ -110,11 +110,11 @@ async def refresh(ctx):
 				self.reload_extension(cog)
 				print("Loaded " + cog)
 			print("-------")
-			await ctx.send("BirbFez haz reloaded!")
+			await ctx.send("BirbOClock haz reloaded!")
 		except:
 			print("Error loading a cog")
 			print("-------")
-			await ctx.send("BirbFez tripped :(")
+			await ctx.send("BirbOClock tripped :(")
 			await asyncio.sleep(10)
 	else:
 		await ctx.channel.send("No thanks, {0.author.mention} :/".format(ctx))

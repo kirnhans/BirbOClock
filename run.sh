@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./venv/bin/python birbFez.py
+./venv/bin/python BirbOClock.py
