@@ -1,0 +1,7 @@
+{"comments" : ["would it be better to have absolute bed-times according to UTC?"]}
+
+{"timezones": {"EST": ["Kona"],
+"CST": ["Soundofez"],
+"PST" : ["Loki", "Mystery-shrouded"],
+"AEST" : {"Kirn"}
+}}

@@ -1,4 +1,4 @@
-Discord Bot: BirbFez
+Discord Bot: BirbOClock
 
 General		[birbFez.py]
 	+ reacts to its name
