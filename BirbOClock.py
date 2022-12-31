@@ -5,7 +5,7 @@ from discord.ext import commands
 import re
 import random
 
-BOT_PREFIX = ("f#", "f!")
+BOT_PREFIX = ("b#", "b!")
 DESCRIPT = "A work in progress. Mostly just reacts to its name."
 
 fez_id = 63331581745438720
