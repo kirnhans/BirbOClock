@@ -38,6 +38,7 @@ class BirbOClock(commands.Bot):
 		# if message.content.startswith("test"):
 		# 	await message.add_reaction("\N{PENSIVE FACE}")
 
+		# TODO: could add variations of name
 		if re.search("BirbOClock", message.content, re.IGNORECASE):
 			print("{0.author.name}#{0.author.id} mentioned BirbOClock in #{0.channel.name} ({0.guild.name})".format(message))
 			print("-------")
