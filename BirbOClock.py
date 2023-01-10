@@ -123,6 +123,12 @@ async def refresh(ctx):
 bot.run(os.environ["DISCORD_TOKEN"])
 
 
+@bot.command(name="stop",
+	description="Kill the bot so we can rerun.",
+	pass_context=True)
+async def stop(ctx):
+	exit(0)
+
 '''''''''
 scrapped code follows
 '''''''''
