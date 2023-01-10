@@ -120,14 +120,13 @@ async def refresh(ctx):
 	else:
 		await ctx.channel.send("No thanks, {0.author.mention} :/".format(ctx))
 
-bot.run(os.environ["DISCORD_TOKEN"])
-
-
 @bot.command(name="stop",
 	description="Kill the bot so we can rerun.",
 	pass_context=True)
 async def stop(ctx):
 	exit(0)
+
+bot.run(os.environ["DISCORD_TOKEN"])
 
 '''''''''
 scrapped code follows
