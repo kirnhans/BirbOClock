@@ -38,14 +38,15 @@ class BirbOClock(commands.Bot):
 		# if message.content.startswith("test"):
 		# 	await message.add_reaction("\N{PENSIVE FACE}")
 
-		# TODO: could add variations of name
-		if re.search("BirbOClock", message.content, re.IGNORECASE):
-			print("{0.author.name}#{0.author.id} mentioned BirbOClock in #{0.channel.name} ({0.guild.name})".format(message))
-			print("-------")
-			emoji = ["\N{EYES}", "\N{THUMBS UP SIGN}", "\N{HATCHING CHICK}", "\N{BIRD}", 
-			"\N{BREAD}"]
-			mojinum = len(emoji) - 1
-			await message.add_reaction(emoji[random.randint(0,mojinum)])
+		birb_names = ["BirbOClock", "Birb", "Birb O'Clock"]
+		for birb_name in birb_names:
+			if re.search(birb_name, message.content, re.IGNORECASE):
+				print("{0.author.name}#{0.author.id} mentioned BirbOClock in #{0.channel.name} ({0.guild.name})".format(message))
+				print("-------")
+				emoji = ["\N{EYES}", "\N{THUMBS UP SIGN}", "\N{HATCHING CHICK}", "\N{BIRD}", 
+				"\N{BREAD}"]
+				mojinum = len(emoji) - 1
+				await message.add_reaction(emoji[random.randint(0,mojinum)])
 
 		if "sleepy" in [r.name for r in message.author.roles]:
 			print("{0.author.name}#{0.author.id} is still awake in #{0.channel.name} ({0.guild.name})".format(message))

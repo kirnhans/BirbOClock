@@ -24,9 +24,6 @@ MSGHELLO = ["Henllo {0.message.author.mention}!!",
 "╱╱┏┳┓╭╮┏┳┓ ╲╲ \n" +
 "▔▏┗┻┛┃┃┗┻┛▕▔",]
 
-PICHELLO = ["little people/daddy go bye bye.png",
-"little people/this is a clock.jpg",]
-
 INDEX = -1
 
 class BasicCog(commands.Cog, name='Requested Commands'):
@@ -40,11 +37,11 @@ class BasicCog(commands.Cog, name='Requested Commands'):
 		brief="For sh*ts and giggles.",
 		aliases=["hi"])
 	async def hello(self, ctx):
-		INDEX = random.randint(0, len(MSGHELLO)+len(PICHELLO)-1)
+		INDEX = random.randint(0, len(MSGHELLO)-1)
 		if INDEX < len(MSGHELLO):
 			await ctx.send(MSGHELLO[INDEX].format(ctx))
-		else:
-			await ctx.send("{0.message.author.mention}".format(ctx), file=discord.File("images/"+PICHELLO[INDEX-len(MSGHELLO)]))
+		# else:
+		# 	await ctx.send("{0.message.author.mention}".format(ctx), file=discord.File("images/"+PICHELLO[INDEX-len(MSGHELLO)]))
 
 	# inthishouse - sends the "in this house" meme
 	# consider moving into a new cog (cogMemes)
