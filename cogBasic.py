@@ -45,7 +45,10 @@ class BasicCog(commands.Cog, name='Requested Commands'):
 
 	# inthishouse - sends the "in this house" meme
 	# consider moving into a new cog (cogMemes)
-	@commands.command(description="Format your own \"in this house\" meme!", brief="there is no dying.")
+	@commands.command(name="inthishouse",
+			  description="Format your own \"in this house\" meme!",
+			  brief="there is no dying.",
+			  aliases=["ith"])
 	async def inthishouse(self, ctx, *, message:str):
 		# try:
 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n" + message + "\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
@@ -61,10 +64,6 @@ class BasicCog(commands.Cog, name='Requested Commands'):
 		# 	except asyncio.TimeoutError:
 		# 		house = "...\n┏┓\n┃┃╱╲ \n┃╱╱╲╲ in\n╱╱╭╮╲╲this\n▔▏┗┛▕▔  house\n╱▔▔▔▔▔▔▔▔▔▔╲ \n**BirbOClock is the besst!!**\n╱╱┏┳┓╭╮┏┳┓ ╲╲ \n▔▏┗┻┛┃┃┗┻┛▕▔"
 		# 		await ctx.send(house)
-
-	@commands.command(description="Shortened command for inthishouse", brief="we try.")
-	async def ith(self, ctx, *, message:str):
-		inthishouse(self,ctx,*,message:str)
 		
 	# sleep - sends "sleep.png"
 	@commands.command(name="sleep",
