@@ -8,7 +8,7 @@ import random
 BOT_PREFIX = ("b#", "b!")
 DESCRIPT = "A work in progress. Mostly just reacts to its name."
 
-fez_id = 63331581745438720
+authorized_id = [63331581745438720, 328458536168194049, 111281758690914304]
 birbcogs = ["cogBasic", "cogInfo", ]
 
 class BirbOClock(commands.Bot):
@@ -106,7 +106,7 @@ async def ping(ctx):
 	aliases=["reload", "rld","rf"],
 	pass_context=True)
 async def refresh(ctx):
-	if ctx.message.author.id == fez_id:
+	if ctx.message.author.id in authorized_id:
 		try:
 			for cog in birbcogs:
 				self.reload_extension(cog)
